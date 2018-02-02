@@ -108,6 +108,9 @@ C      always need for diagnostics
        _RL a_k(Nr,tlam)
 #endif /* WAVEBANDS */
 
+#ifdef DAR_DIAG_IRON
+      _RL FeTbgcSource(1-OLx:sNx+OLx,1-OLy:sNy+OLy,Nr)
+#endif
 
 #ifdef DAR_DIAG_DIVER
       _RL  Diver1(1-OLx:sNx+OLx,1-OLy:sNy+OLy,Nr)
@@ -1322,6 +1325,9 @@ c ANNA end TAVE
              ENDIF
 #endif
 COJ
+#ifdef DAR_DIAG_IRON
+             FeTbgcSource(i,j,k) = dtplankton*dfetl
+#endif
 #endif /* ALLOW_DIAGNOSTICS */
 
 c total fixation (NOTE - STILL NEEDS GLOB SUM)
@@ -1524,6 +1530,20 @@ COJ fill diagnostics
         WRITE(diagname,'(A8)') 'Nfix    '
         CALL DIAGNOSTICS_FILL( Nfixarr(1-Olx,1-Oly,1), diagname,
      &                         0,Nr,2,bi,bj,myThid )
+#ifdef DAR_DIAG_IRON
+        WRITE(diagname,'(A8)') 'FeTbgc  '
+        CALL DIAGNOSTICS_FILL( FeTbgcSource(1-Olx,1-Oly,1), diagname,
+     &                         0,Nr,2,bi,bj,myThid )
+C        WRITE(diagname,'(A8)') 'UDIAG4  '
+C        CALL DIAGNOSTICS_FILL( consumpFeT(1-Olx,1-Oly,1), diagname,
+C     &                         0,Nr,2,bi,bj,myThid )
+C        WRITE(diagname,'(A8)') 'UDIAG5  '
+C        CALL DIAGNOSTICS_FILL( reminFeT(1-Olx,1-Oly,1), diagname,
+C     &                         0,Nr,2,bi,bj,myThid )
+C        WRITE(diagname,'(A8)') 'UDIAG6  '
+C        CALL DIAGNOSTICS_FILL( scavFeT(1-Olx,1-Oly,1), diagname,
+C     &                         0,Nr,2,bi,bj,myThid )
+#endif
 c ANNA_TAVE
 #ifdef WAVES_DIAG_PCHL
         DO np=1,MIN(99,npmax)
