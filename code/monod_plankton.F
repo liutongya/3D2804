@@ -346,6 +346,10 @@ c variables for reminerlaization of DOM and POM
          _RL preminFe
          _RL preminSi
 
+c variables for Fe diagnostic
+         _RL reminFeT
+         _RL scavFeT 
+
 c for sinking matter
          _RL psinkP
          _RL psinkN
@@ -1579,14 +1583,16 @@ c-ONLYNO3   dNO3dt =  - consumpNO3 +  preminN  + DONremin
 #endif
             endif
 #endif
+            reminFeT = preminFe + DOFeremin
+            scavFeT = scav_part*freefelocal
             dFeTdt =  - consumpFeT +  
 #ifdef ALLOW_CDOM
      &                 DOFeremin
 #else
-     &                 preminFe + DOFeremin
+     &                 reminFeT
 #endif
 #ifdef PART_SCAV
-     &                 - scav_part*freefelocal +
+     &                 - scavFeT +
 #else
      &                 - scav*freefelocal + 
 #endif          

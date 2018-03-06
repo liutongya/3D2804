@@ -82,7 +82,7 @@ C---+----1----+----2----+----3----+----4----+----5----+----6----+----7-|--+----|
 C--   Add diagnostic FeT
       diagName = 'FeTbgc   '
       WRITE(diagTitle, '(A)') 'FeT bgc sink/source'
-      diagUnits = 'mmol Fe/m^3      '
+      diagUnits = 'mmol Fe/m^3/s   '
       diagCode  = 'SM P    MR      '
       CALL DIAGNOSTICS_ADDTOLIST( diagNum,
      I             diagName, diagCode, diagUnits, diagTitle, 0, myThid )

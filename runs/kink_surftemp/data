@@ -56,7 +56,7 @@
 # deltaT=300.0,
  deltaTmom=600.,
  deltaTtracer=600.,
- nIter0=699840,
+ nIter0=0,
 # 100 years
 # nTimeSteps=155520,
  nTimeSteps=1036800,
