@@ -119,8 +119,8 @@ c critical light level (muEin/m2/s) after which oxidation starts
        PAR0 = 10. _d 0
 c
 c set mort days ...small or big organism?
-       Smallmort = 15. _d 0  ! default 10. _d 0
-       Bigmort   = 15. _d 0  ! default 10. _d 0
+       Smallmort = 15. _d 0  ! Steph (2005) / default 10. _d 0
+       Bigmort   = 15. _d 0  ! Steph (2005) / default 10. _d 0
        Smallmortrange = 0. _d 0
        Bigmortrange = 0. _d 0
 c set export fraction ...small or big organism?
@@ -256,7 +256,7 @@ c       GrazeFast = 1.0 _d 0/(2.0 _d 0*pday)  ! default
        GrazeFast = 1. _d 0/(1. _d 0*pday)
 c      GrazeSlow = 1.0 _d 0/(30.0 _d 0*pday) ! Dutkiewicz (2009)
 c       GrazeSlow = 1.0 _d 0/(7.0 _d 0*pday)  ! default
-       GrazeSlow = 1. _d 0/(10. _d 0*pday)
+       GrazeSlow = 1. _d 0/(5. _d 0*pday)
 c set grazing efficiency
        GrazeEfflow= 0.2 _d 0  ! default 0.2 _d 0
        GrazeEffmod= 0.5 _d 0  ! default 0.5 _d 0
@@ -275,8 +275,8 @@ c grazing exponential 1= holling 2, 2=holling 3
        hollexp=1.0 _d 0
 #endif
 c set zoo mortality
-       ZoomortSmall = 1.0 _d 0/(40.0 _d 0*pday) ! Dutkiewicz (2009)
-       ZoomortBig = 1.0 _d 0/(40.0 _d 0*pday) ! Dutkiewicz (2009)
+       ZoomortSmall = 1.0 _d 0/(30.0 _d 0*pday) ! Dutkiewicz (2005)
+       ZoomortBig = 1.0 _d 0/(30.0 _d 0*pday) ! Dutkiewicz (2005)
        ZoomortSmall2 = 0. _d 0
        ZoomortBig2 = 0. _d 0
 c set zoo exportfrac
