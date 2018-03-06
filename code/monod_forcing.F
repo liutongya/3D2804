@@ -1167,6 +1167,8 @@ c            endif
 #endif
 c
 c now update main tracer arrays
+c PTRACERS_dTLev    :: Timestep for ptracers ( s ), function of level k
+c defined in PTRACERS_PARAMS.h
           dtplankton = PTRACERS_dTLev(k)/float(nsubtime)
           Ptr(i,j,k,bi,bj,iPO4 ) = Ptr(i,j,k,bi,bj,iPO4) +
      &                                  dtplankton*dpo4l
@@ -1280,6 +1282,8 @@ C           endif
      &             Ptr(i,j,k,bi,bj,iPhy+np2-1),
      &             Ptr(i,j,k,bi,bj,iPhy+np4-1), dPhy(2), dPhy(4)
           endif
+#   timePhase(16) = 0.,
+#   timePhase(16) = 0.,
 
           endif
           enddo  ! np
@@ -1326,7 +1330,7 @@ c ANNA end TAVE
 #endif
 COJ
 #ifdef DAR_DIAG_IRON
-             FeTbgcSource(i,j,k) = dtplankton*dfetl
+             FeTbgcSource(i,j,k) = dfetl
 #endif
 #endif /* ALLOW_DIAGNOSTICS */
 
