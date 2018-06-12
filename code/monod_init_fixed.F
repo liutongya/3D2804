@@ -119,7 +119,7 @@ c critical light level (muEin/m2/s) after which oxidation starts
        PAR0 = 10. _d 0
 c
 c set mort days ...small or big organism?
-       Smallmort = 15. _d 0  ! Steph (2005) / default 10. _d 0
+       Smallmort = 23. _d 0  ! Steph (2005) / default 10. _d 0
        Bigmort   = 15. _d 0  ! Steph (2005) / default 10. _d 0
        Smallmortrange = 0. _d 0
        Bigmortrange = 0. _d 0
@@ -133,21 +133,21 @@ c
 #ifndef GEIDER
 ccc GEIDER off ccc
 c set growth days ...small or big organism?
-       Smallgrow = .8 _d 0 !default: .7 _d 0; Dutkiewicz (2009)
-       Biggrow   = .5 _d 0 !default: .4 _d 0; Dutkiewicz (2009)
+       Smallgrow = 1.8 _d 0 !default: .7 _d 0; Dutkiewicz (2009)
+       biggrow   = 0.5 _d 0 !default: .4 _d 0; Dutkiewicz (2009)
        Smallgrowrange = 0. _d 0
        Biggrowrange = 0. _d 0
        diaz_growfac = 2. _d 0
 c set parameters for light function for phyto growth
 c kpar/kinhib is divided by 10/1000 later in monod_plankton.F
 c In TWO_SPECIES_SETUP, std values are not used (monod_generate_phyto.F)
-       smallksatpar =    0.12 _d 0 ! default 0.12 ! 0.8 _d 0
+       smallksatpar =    0.2 _d 0 ! default 0.12 ! 0.8 _d 0
        smallksatparstd = 0.20 _d 0 ! default 0.2  ! 0.3 _d 0
-       smallkinhib =     6.0 _d 0  ! default 6.0  ! 2.0 _d 0
+       smallkinhib =     0.2 _d 0  ! default 6.0  ! 2.0 _d 0
        smallkinhibstd =  0.10 _d 0 ! default 0.1  ! 0.5 _d 0
-       Bigksatpar =      0.12 _d 0 ! default 0.12 ! 0.35 _d 0
+       Bigksatpar =      0.001 _d 0 ! default 0.12 ! 0.35 _d 0
        Bigksatparstd =   0.06 _d 0 ! default 0.06 ! 0.1 _d 0
-       Bigkinhib =       1.0 _d 0  ! default 1.0  ! 0.5 _d 0
+       Bigkinhib =       2.3 _d 0  ! default 1.0  ! 0.5 _d 0
        Bigkinhibstd =    0.05 _d 0 ! default 0.05 ! 0.1 _d 0
 #else
 ccc GEIDER on ccc
@@ -171,7 +171,7 @@ c       smallalphachlrange = 1. _d -6 !mmol C (uEin/m-2)-1 (mg Chl)-1
 c       Bigalphachl = 6. _d -7        !mmol C (uEin/m-2)-1 (mg Chl)-1
 c       Bigalphachlrange = 4. _d -7   !mmol C (uEin/m-2)-1 (mg Chl)-1
 c ANNA mQyield vals are from alphachl / aphy_chl which for now is 0.02
-c ANNA ranges for mQyield are same as alphachl but reduced by factor 100
+c ANNanges for mQyield are same as alphachl but reduced by factor 100
        smallmQyield = 5. _d -5        !mmol C (uEin)-1
        smallmQyieldrange = 1. _d -4   !mmol C (uEin)-1
        BigmQyield = 3. _d -5          !mmol C (uEin)-1
@@ -200,9 +200,9 @@ c      for TWO_SPECIES_SETUP, temprange is turned off
        tempnorm = 0.3 _d 0  ! 1. _d 0
        tempdecay = 4. _d 0
 c set phosphate half stauration constants .. small or big organism
-       SmallPsat=0.015 _d 0 ! default 0.015 _d 0
-       BigPsat=0.035 _d 0 ! default 0.035 _d 0
-       ProcPsat=0.01 _d 0  ! default 0.01 _d 0
+       SmallPsat=0.008 _d 0 ! default 0.015 _d 0
+       BigPsat=0.024 _d 0 ! default 0.035 _d 0
+       ProcPsat=0.008 _d 0  ! default 0.01 _d 0
        UniDzPsat=0.012 _d 0 ! default 0.012 _d 0
        SmallPsatrange=0.02 _d 0 ! default 0.02 _d 0
        BigPsatrange=0.02 _d 0 ! default 0.02 _d 0
@@ -222,9 +222,9 @@ c ammonia and nitrite inhibition
 c set si half sat
        val_ksatsi=1. _d 0
 c set nutrient ratios for phyto
-       val_R_SiP_diatom=16.0 _d 0  ! 32 for Fanny's runs
+       val_R_SiP_diatom=32.0 _d 0  ! 32 for Fanny's runs
        val_R_NP=16.0 _d 0
-       val_RFeP=1.0 _d -3
+       val_RFeP=.8 _d -3
        val_R_NP_diaz=40.0 _d  0
        val_RFeP_diaz=30.0 _d 0 * val_RFeP
        val_R_PC=120.0 _d 0
@@ -247,26 +247,29 @@ c set grazing of diatom factor
 ccc OLD_GRAZE off ccc
 c grazing hlaf saturation
 c      kgrazesat = 0.1 _d 0
-       kgrazesat = 0.1 _d 0
-c      phygrazmin = 1 _d -5
+       kgrazesat = 0.05 _d 0
+c       phygrazmin = 1 _d -5
+c       phygrazmin = 1 _d -8
        phygrazmin = 1 _d -10
 c set grazing rates .. small or big organism?
-c      GrazeFast = 1.0 _d 0/(5.0 _d 0*pday) ! Dutkiewicz (2009)
+c       GrazeFast = 1.0 _d 0/(5.0 _d 0*pday) ! Dutkiewicz (2009)
 c       GrazeFast = 1.0 _d 0/(2.0 _d 0*pday)  ! default
-       GrazeFast = 1. _d 0/(1. _d 0*pday)
-c      GrazeSlow = 1.0 _d 0/(30.0 _d 0*pday) ! Dutkiewicz (2009)
+c       GrazeFast = 1. _d 0/(1. _d 0*pday)
+       GrazeFast = 1. _d 0/(1.4 _d 0*pday)
+c       GrazeSlow = 1.0 _d 0/(30.0 _d 0*pday) ! Dutkiewicz (2009)
 c       GrazeSlow = 1.0 _d 0/(7.0 _d 0*pday)  ! default
-       GrazeSlow = 1. _d 0/(5. _d 0*pday)
+c       GrazeSlow = 1. _d 0/(5. _d 0*pday)
+       GrazeSlow = 1. _d 0/(9.0 _d 0*pday)
 c set grazing efficiency
-       GrazeEfflow= 0.2 _d 0  ! default 0.2 _d 0
+       GrazeEfflow= 0.1 _d 0  ! default 0.2 _d 0
        GrazeEffmod= 0.5 _d 0  ! default 0.5 _d 0
        GrazeEffhi = 0.7 _d 0  ! default 0.7 _d 0
 c set palatibility
        palathi = 1.0 _d 0
-       palatlo = .4 _d 0  ! default: 0.2 _d 0
+       palatlo = .2 _d 0  ! default: 0.2 _d 0
 c set palatibility diatom factor
-       diatomgraz = .7 _d 0  ! default: 0.7 _d 0
-       coccograz = .6 _d 0  ! default: 0.6 _d 0
+       diatomgraz = 1.0 _d 0  ! default: 0.7 _d 0
+       coccograz = 0.6 _d 0  ! default: 0.6 _d 0
        olargegraz = 1.0 _d 0
 c set faction graz to POM
        ExGrazfracbig = .8 _d 0
@@ -275,17 +278,17 @@ c grazing exponential 1= holling 2, 2=holling 3
        hollexp=1.0 _d 0
 #endif
 c set zoo mortality
-       ZoomortSmall = 1.0 _d 0/(30.0 _d 0*pday) ! Dutkiewicz (2005)
-       ZoomortBig = 1.0 _d 0/(30.0 _d 0*pday) ! Dutkiewicz (2005)
+       ZoomortSmall = 1.0 _d 0/(50.0 _d 0*pday) ! 30 day; Dutkiewicz (2005)
+       ZoomortBig = 1.0 _d 0/(35.0 _d 0*pday) ! 30 day; Dutkiewicz (2005)
        ZoomortSmall2 = 0. _d 0
        ZoomortBig2 = 0. _d 0
-c set zoo exportfrac
+c set zoo exportfrac (fraction of Z mortality sinking out; MONOD.h)
        ZooexfacSmall = 0.2 _d 0
-       ZooexfacBig = 0.7 _d 0
+       ZooexfacBig = 0.5 _d 0 ! default 0.7
 c minimum phyto (below which grazing and mortality doesn't happen)
-c      phymin = 1 _d -10
-c      phymin = 1 _d -50
-       phymin = 1 _d -20
+       phymin = 1 _d -10
+c       phymin = 1 _d -50
+c       phymin = 1 _d -20
 c DOM remin rates, Dutkiewicz (2009)
        Kdop = 1.0 _d 0/(100.0 _d 0*pday)
        Kdon = 1.0 _d 0/(100.0 _d 0*pday)

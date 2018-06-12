@@ -151,19 +151,20 @@ c and want some diatoms to use silicate
 c Agreed by Takaya: we want to keep silicate dependency
 c In TWO_SPECIES_SETUP, the large phyto is (presumably) always diatoms
 c        diacoc(np) = 0.0 _d 0 ! default
-c From monod_generate_zoo.F, we find that diatom (diacoc=1.),
+c From monod_generate_zoo.F, we find that if physize=1., diatom (diacoc=1.),
 c prochlorococcus (diacoc=2.) and large non-diatom phyto (diacoc=0.)
         if (physize(np) .eq. 1.0 _d 0) then
-          RandNo = darwin_random(myThid)
-          if(RandNo .gt. 0.500 _d 0)then
-            diacoc(np) = 1.0 _d 0
-          else
-            diacoc(np) = 0.0 _d 0
-          endif
-c        else
+c          RandNo = darwin_random(myThid)
+c          if(RandNo .gt. 0.500 _d 0)then
+c            diacoc(np) = 1.0 _d 0
+c          else
+c            diacoc(np) = 0.0 _d 0
+c          endif
+          diacoc(np) = 1.0 _d 0
+        else
 c          The small phytopkanton don't necessarily have to be
 c          coccolithophores
-c          diacoc(np) = 2.0 _d 0
+          diacoc(np) = 0.0 _d 0
         endif
 #endif
 #ifdef NINE_SPECIES_SETUP

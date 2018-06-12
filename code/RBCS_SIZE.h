@@ -14,6 +14,6 @@ CEOP
 C---  RBCS Parameters:
 C     maskLEN :: number of mask to read
       INTEGER maskLEN
-      PARAMETER( maskLEN = 6 )
+      PARAMETER( maskLEN = 3 )
 
 #endif /* ALLOW_RBCS */
